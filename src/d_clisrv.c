@@ -1554,7 +1554,8 @@ static void CL_LoadReceivedSavegame(boolean reloading)
 	if (P_LoadNetGame(reloading))
 	{
 		const UINT8 actnum = mapheaderinfo[gamemap-1]->actnum;
-		CONS_Printf(M_GetText("Map is now \"%s"), G_BuildMapName(gamemap));
+    time_t t;
+		CONS_Printf(M_GetText("%s Map is now \"%s"), ctime(&t), G_BuildMapName(gamemap));
 		if (strcmp(mapheaderinfo[gamemap-1]->lvlttl, ""))
 		{
 			CONS_Printf(": %s", mapheaderinfo[gamemap-1]->lvlttl);

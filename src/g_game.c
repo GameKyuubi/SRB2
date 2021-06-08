@@ -11,6 +11,7 @@
 /// \file  g_game.c
 /// \brief game loop functions, events handling
 
+#include <time.h>
 #include "doomdef.h"
 #include "console.h"
 #include "d_main.h"
@@ -62,6 +63,9 @@ JoyType_t Joystick2;
 
 // 1024 bytes is plenty for a savegame
 #define SAVEGAMESIZE (1024)
+
+//for log timestamps
+time_t t;
 
 char gamedatafilename[64] = "gamedata.dat";
 char timeattackfolder[64] = "main";
@@ -4845,7 +4849,7 @@ void G_InitNew(UINT8 pultmode, const char *mapname, boolean resetplayer, boolean
 	{
 		char *title = G_BuildMapTitle(gamemap);
 
-		CONS_Printf(M_GetText("Map is now \"%s"), G_BuildMapName(gamemap));
+		CONS_Printf(M_GetText("%s MAP IS NOW \"%s"), ctime(&t), G_BuildMapName(gamemap));
 		if (title)
 		{
 			CONS_Printf(": %s", title);

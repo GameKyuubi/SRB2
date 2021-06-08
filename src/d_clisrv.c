@@ -80,6 +80,9 @@ char motd[254], server_context[8]; // Message of the Day, Unique Context (even w
 UINT8 playernode[MAXPLAYERS];
 char playeraddress[MAXPLAYERS][64];
 
+//for log timestamps
+time_t t;
+
 // Minimum timeout for sending the savegame
 // The actual timeout will be longer depending on the savegame length
 tic_t jointimeout = (10*TICRATE);
@@ -1554,8 +1557,7 @@ static void CL_LoadReceivedSavegame(boolean reloading)
 	if (P_LoadNetGame(reloading))
 	{
 		const UINT8 actnum = mapheaderinfo[gamemap-1]->actnum;
-    time_t t;
-		CONS_Printf(M_GetText("%s Map is now \"%s"), ctime(&t), G_BuildMapName(gamemap));
+		CONS_Printf(M_GetText("%s MAP IS NOW \"%s"), ctime(&t), G_BuildMapName(gamemap));
 		if (strcmp(mapheaderinfo[gamemap-1]->lvlttl, ""))
 		{
 			CONS_Printf(": %s", mapheaderinfo[gamemap-1]->lvlttl);

@@ -64,9 +64,6 @@ JoyType_t Joystick2;
 // 1024 bytes is plenty for a savegame
 #define SAVEGAMESIZE (1024)
 
-//for log timestamps
-time_t t;
-
 char gamedatafilename[64] = "gamedata.dat";
 char timeattackfolder[64] = "main";
 char customversionstring[32] = "\0";
@@ -4849,7 +4846,8 @@ void G_InitNew(UINT8 pultmode, const char *mapname, boolean resetplayer, boolean
 	{
 		char *title = G_BuildMapTitle(gamemap);
 
-		CONS_Printf(M_GetText("%s MAP IS NOW \"%s"), ctime(&t), G_BuildMapName(gamemap));
+		time_t t_ = time(NULL); //for log timestamps
+		CONS_Printf(M_GetText("%s MAP IS NOW \"%s"), ctime(&t_), G_BuildMapName(gamemap));
 		if (title)
 		{
 			CONS_Printf(": %s", title);
